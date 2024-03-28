@@ -17,7 +17,7 @@ const LoginScreen = () => {
 
   const [login, { isLoading }] = useLoginMutation();
 
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
     if (userInfo) {
