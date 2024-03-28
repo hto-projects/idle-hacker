@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
-import User from '../models/userModel.js';
-import generateToken from '../utils/generateToken.js';
+import User from '../models/userModel';
+import generateToken from '../utils/generateToken';
 
 // @desc    Auth user & get token
 // @route   POST /api/users/auth
@@ -8,7 +8,7 @@ import generateToken from '../utils/generateToken.js';
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const user: any = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id);
@@ -71,7 +71,7 @@ const logoutUser = (req, res) => {
 // @desc    Get user profile
 // @route   GET /api/users/profile
 // @access  Private
-const getUserProfile = asyncHandler(async (req, res) => {
+const getUserProfile = asyncHandler(async (req: any, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -89,7 +89,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @desc    Update user profile
 // @route   PUT /api/users/profile
 // @access  Private
-const updateUserProfile = asyncHandler(async (req, res) => {
+const updateUserProfile = asyncHandler(async (req: any, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
